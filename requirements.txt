@@ -4,3 +4,5 @@ matplotlib>=3.7
 seaborn>=0.13
 jupyter
 plotly>=5.0
+scipy>=1.11
+statsmodels>=0.14

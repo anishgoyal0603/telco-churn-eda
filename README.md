@@ -6,6 +6,7 @@ Weekly tasks for the **Virtual Data Science with Python Apprentice Internship (Y
 |---|---|---|---|
 | 1 | Data acquisition, cleaning and EDA | `notebooks/week1_data_cleaning_eda.ipynb` | `reports/Week1_Report_Anish_Goyal.docx` |
 | 2 | Advanced visualization and storytelling | `notebooks/week2_visual_storytelling.ipynb` | `reports/Week2_Report_Anish_Goyal.docx` |
+| 3 | Statistical analysis and hypothesis testing | `notebooks/week3_hypothesis_testing.ipynb` | `reports/Week3_Report_Anish_Goyal.docx` |
 
 ## Dataset
 IBM Telco Customer Churn – 7,043 customers, 21 columns.
@@ -19,12 +20,14 @@ telco-churn-eda/
 │   └── processed/telco_churn_clean.csv     # output of the cleaning steps
 ├── notebooks/
 │   ├── week1_data_cleaning_eda.ipynb       # Week 1: cleaning + EDA
-│   └── week2_visual_storytelling.ipynb     # Week 2: data story
+│   ├── week2_visual_storytelling.ipynb     # Week 2: data story
+│   └── week3_hypothesis_testing.ipynb      # Week 3: hypothesis tests
 ├── reports/
-│   ├── figures/                            # Week 1 charts (week2/ subfolder for Week 2)
+│   ├── figures/                            # Week 1 charts (week2/, week3/ subfolders)
 │   ├── interactive/churn_sunburst.html     # Plotly chart, open in a browser
 │   ├── Week1_Report_Anish_Goyal.docx
-│   └── Week2_Report_Anish_Goyal.docx
+│   ├── Week2_Report_Anish_Goyal.docx
+│   └── Week3_Report_Anish_Goyal.docx
 ├── requirements.txt
 └── README.md
 ```
@@ -58,6 +61,19 @@ Six visualizations, each answering one question for a non-technical reader:
 | 4 | Why? | Dumbbell chart | Security/support add-ons go with less than half the churn; streaming doesn't |
 | 5 | Who to target? | Risk-factor ladder | 0 red flags → 2.5% churn, 5 red flags → 72% |
 | 6 | Big picture | Nested donut + interactive Plotly sunburst | 55% of customers are month-to-month, 43% of them churned |
+
+## Week 3 – Hypothesis testing
+Five hypotheses, Bonferroni-corrected significance level **α = 0.01** (0.05 / 5).
+
+| # | Hypothesis | Test | Result | Effect size | Decision |
+|---|---|---|---|---|---|
+| H1 | Churned customers pay different monthly charges | Welch's t-test (+ Mann–Whitney U) | t = 18.41, p < 0.001; +$13.18 (95% CI $11.77–$14.58) | Cohen's d = 0.45 | Reject H0 |
+| H2 | Contract type is associated with churn | Chi-square test | χ² = 1,184.6, df = 2, p < 0.001 | Cramér's V = 0.41 | Reject H0 |
+| H3 | Monthly charges differ by payment method | Welch's ANOVA + Holm / Tukey post-hoc | F = 520.9, p < 0.001 | η² = 0.16 | Reject H0 |
+| H4 | Internet customers with Tech Support churn less | Two-proportion z-test + logistic regression | 15.2% vs 41.6%, z = −20.38, p < 0.001 | RR = 0.36, adjusted OR = 0.52 | Reject H0 |
+| H5 | Gender is associated with churn (control) | Chi-square test | χ² = 0.48, p = 0.487 | Cramér's V = 0.008 | Fail to reject H0 |
+
+Assumptions (equal variances, normality / sample size, expected cell counts) are checked before each test in the notebook.
 
 ## How to run
 ```bash
